@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coloreado de Grafos</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=Syne:wght@400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<div class="app">
+
+    <!-- HEADER -->
+    <header class="header">
+        <div class="header-inner">
+            <div class="header-title">
+                <span class="header-tag">Ciencias de la Computación II</span>
+                <h1>Coloreado de Grafos</h1>
+                <p class="header-sub">Algoritmos Voraz · Welsh-Powell · DSatur</p>
+            </div>
+        </div>
+    </header>
+
+    <!-- MAIN LAYOUT -->
+    <main class="main">
+
+        <!-- PANEL IZQUIERDO: Entrada -->
+        <aside class="panel panel-input">
+            <div class="panel-header">
+                <span class="panel-icon">⬡</span>
+                <h2>Definición del Grafo</h2>
+            </div>
+
+            <div class="field-group">
+                <label for="nodos">Número de nodos</label>
+                <div class="number-control">
+                    <button class="num-btn" id="btn-minus" aria-label="Restar nodo">−</button>
+                    <input type="number" id="nodos" min="1" max="20" value="6">
+                    <button class="num-btn" id="btn-plus" aria-label="Agregar nodo">+</button>
+                </div>
+            </div>
+
+            <div class="field-group">
+                <div class="edges-header">
+                    <label>Aristas <span class="hint">(nodos con letras, desde A)</span></label>
+                    <button class="btn-ghost" id="add-edge">+ Agregar</button>
+                </div>
+                <div id="edges-container"></div>
+            </div>
+
+            <div class="presets">
+                <span class="presets-label">Ejemplos rápidos:</span>
+                <div class="preset-btns">
+                    <button class="preset-btn" data-preset="ciclo">Ciclo C5</button>
+                    <button class="preset-btn" data-preset="bipartito">Bipartito</button>
+                    <button class="preset-btn" data-preset="petersen">Petersen</button>
+                    <button class="preset-btn" data-preset="completo">K4</button>
+                </div>
+            </div>
+
+            <button class="btn-run" id="generate">
+                <span class="btn-run-icon">▶</span>
+                Ejecutar Algoritmos
+            </button>
+        </aside>
+
+        <!-- PANEL DERECHO: Resultados -->
+        <section class="panel panel-results" id="results-panel">
+
+            <!-- Placeholder cuando no hay resultados -->
+            <div class="empty-state" id="empty-state">
+                <div class="empty-icon">◈</div>
+                <p>Define el grafo y presiona <strong>Ejecutar</strong></p>
+            </div>
+
+            <!-- Resultados reales (ocultos al inicio) -->
+            <div class="results-content" id="results-content" style="display:none">
+
+                <!-- Número cromático -->
+                <div class="chromatic-row" id="chromatic-row"></div>
+
+                <!-- Tabs de algoritmos -->
+                <div class="tabs-wrap">
+                    <div class="tabs" role="tablist">
+                        <button class="tab active" data-algo="voraz" role="tab">Voraz</button>
+                        <button class="tab" data-algo="welsh" role="tab">Welsh-Powell</button>
+                        <button class="tab" data-algo="dsatur" role="tab">DSatur</button>
+                    </div>
+
+                    <div class="tab-content" id="tab-content"></div>
+                </div>
+
+                <!-- Canvas del grafo -->
+                <div class="graph-section">
+                    <div class="graph-section-header">
+                        <h3>Visualización del Grafo Coloreado</h3>
+                        <div class="algo-selector">
+                            <label for="viz-algo">Mostrar:</label>
+                            <select id="viz-algo">
+                                <option value="voraz">Voraz</option>
+                                <option value="welsh">Welsh-Powell</option>
+                                <option value="dsatur">DSatur</option>
+                            </select>
+                        </div>
+                    </div>
+                    <canvas id="graphCanvas"></canvas>
+                    <div class="legend" id="legend"></div>
+                </div>
+
+                <!-- Representaciones de matriz -->
+                <div class="matrix-section">
+                    <div class="matrix-tabs">
+                        <button class="mtab active" data-mtab="adj">Matriz Adyacencia</button>
+                        <button class="mtab" data-mtab="list">Lista Adyacencia</button>
+                        <button class="mtab" data-mtab="inc">Matriz Incidencia</button>
+                        <button class="mtab" data-mtab="elist">Lista Aristas</button>
+                    </div>
+                    <div class="matrix-content" id="matrix-content"></div>
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
